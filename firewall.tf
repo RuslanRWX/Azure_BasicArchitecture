@@ -1,5 +1,5 @@
 
-
+/*
 resource "azurerm_firewall" "FW_MAIN" {
   name                = "FW_MAIN"
   location            = azurerm_resource_group.terra-rg.location
@@ -52,15 +52,15 @@ resource "azurerm_firewall_network_rule_collection" "rule_allow_local" {
     name = "rule"
 
     source_addresses = [
-      "10.84.1.0/24"
+      "*"
     ]
 
     destination_ports = [
-      "*",
+      "22",
     ]
 
     destination_addresses = [
-      "10.84.1.0/24"
+      "*"
     ]
 
     protocols = [
@@ -97,32 +97,33 @@ resource "azurerm_firewall_network_rule_collection" "egress_allow" {
     ]
   }
 }
+*/
 /*
-resource "azurerm_firewall_network_rule_collection" "ingress_allow_22" {
+resource "azurerm_firewall_nat_rule_collection" "ingress_allow_22" {
   name                = "ingress_allow_22"
   azure_firewall_name = azurerm_firewall.FW_MAIN.name
   resource_group_name = azurerm_resource_group.terra-rg.name
   priority            = 1100
-  action              = "Allow"
+  action              = "Dnat"
 
   rule {
-    name = "rule"
+    name = "rule ssh pass"
 
-    source_addresses = [
+    source_addresses =  flatten([
       "*"
-    ]
-
-    destination_ports = [
-      "22",
-    ]
-
-    destination_addresses = [
-      "*"
-    ]
-
+    ])
+    destination_ports =  flatten([
+      "22022"
+    ])
+    destination_addresses =  flatten([ 
+      "52.142.25.252"
+    ])
+    translated_port = "22"
+  
+    translated_address = "10.84.1.100"
+    
     protocols = [
-      "TCP",
-      "UDP"
+      "TCP"
 ]
   }
 }
@@ -162,7 +163,7 @@ resource "azurerm_firewall_nat_rule_collection" "Snat53" {
   }
 }
 */
-
+/*
 resource "azurerm_firewall_nat_rule_collection" "Dnat22" {
   name                = "Dnat22"
   azure_firewall_name = azurerm_firewall.FW_MAIN.name
@@ -195,4 +196,6 @@ resource "azurerm_firewall_nat_rule_collection" "Dnat22" {
     ]
   }
 }
+*/
+
 

@@ -32,6 +32,7 @@ resource "azurerm_virtual_machine" "main" {
     computer_name  = "hostname-${each.key}"
     admin_username = "adminuser"
     admin_password = "Rubuntu0019!@"
+    custom_data    = "${file("cloud-init.sh")}" # file("could-init.sh")
   }
   os_profile_linux_config {
     disable_password_authentication = false
@@ -50,13 +51,16 @@ resource "azurerm_network_interface" "main" {
     name                          = "${var.prefix}-configuration1"
     subnet_id                     = azurerm_subnet.common.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.loop[each.key].id
   }
 }
+#*/
 
-*/  # LOOP END
+#*/  # LOOP END
 
 #/* LOOP LINUX 
 
+#/*   test last
 resource "azurerm_linux_virtual_machine" "VM-TO" {
   for_each              = toset(local.vms)
   name                  = "VM-T0-${each.key}"
@@ -67,6 +71,7 @@ resource "azurerm_linux_virtual_machine" "VM-TO" {
   network_interface_ids = [
     azurerm_network_interface.VM-TO-nic[each.key].id,
   ]
+   custom_data    = base64encode(file("cloud-init.sh")) # file("could-init.sh")
 
   admin_ssh_key {
     username = "adminuser"
@@ -74,9 +79,13 @@ resource "azurerm_linux_virtual_machine" "VM-TO" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    #publisher = "Canonical"
+    #offer     = "UbuntuServer"
+    #sku       = "18.04-LTS"
+    #version   = "latest"
+    publisher = "RedHat"
+    offer     = "RHEL"
+    sku       = "7-LVM"
     version   = "latest"
   }
 
@@ -101,7 +110,7 @@ resource "azurerm_network_interface" "VM-TO-nic" {
     name                          = "${var.prefix}-configuration1VM-T0-${each.key}"
     subnet_id                     = azurerm_subnet.common.id
     private_ip_address_allocation = "Dynamic"
-#    public_ip_address_id          = azurerm_public_ip.loop[each.key].id
+    public_ip_address_id          = azurerm_public_ip.loop[each.key].id
   }
 }
 

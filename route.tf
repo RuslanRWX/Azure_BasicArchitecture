@@ -21,8 +21,7 @@ resource "azurerm_route_table" "main_route" {
   }
 }
 */
-
-
+/*
 resource "azurerm_route" "AZ_to_FW" {
   name                   = "AZ_to_FW"
   resource_group_name   = azurerm_resource_group.terra-rg.name
@@ -33,6 +32,7 @@ resource "azurerm_route" "AZ_to_FW" {
 
   depends_on = [azurerm_route_table.main_route]
 }
+*/
 
 resource "azurerm_route" "AZ_to_Net" {
   name                   = "AZ_to_Net"
