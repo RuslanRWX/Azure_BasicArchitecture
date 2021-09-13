@@ -1,10 +1,9 @@
 
-/*
 resource "azurerm_firewall" "FW_MAIN" {
   name                = "FW_MAIN"
   location            = azurerm_resource_group.terra-rg.location
-resource_group_name   = azurerm_resource_group.terra-rg.name
-
+  resource_group_name   = azurerm_resource_group.terra-rg.name
+  
   ip_configuration {
     name                 = "configuration"
     subnet_id            = azurerm_subnet.AzureFirewallSubnet.id
@@ -97,7 +96,6 @@ resource "azurerm_firewall_network_rule_collection" "egress_allow" {
     ]
   }
 }
-*/
 /*
 resource "azurerm_firewall_nat_rule_collection" "ingress_allow_22" {
   name                = "ingress_allow_22"
