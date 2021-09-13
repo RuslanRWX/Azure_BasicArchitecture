@@ -8,7 +8,7 @@ Different type of infrastructure in the dirctories
 To develop infrastructure:
 1. get clone repositroy 
 2. pick one of directory 
-3. add terraform.tfvars with content:<br>
+3. add terraform.tfvars file with content:<br>
 subscription_id = ""<br>
 client_id = ""<br>
 client_secret = ""<br>
