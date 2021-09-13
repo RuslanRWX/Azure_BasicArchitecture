@@ -9,7 +9,7 @@ To develop infrastructure:
 1. get clone repositroy 
 2. pick one of directory 
 3. add terraform.tfvars with content:
-subscription_id = "" 
+subscription_id = ""<br>
 client_id = ""
 client_secret = ""
 tenant_id = ""
