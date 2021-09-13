@@ -10,9 +10,9 @@ To develop infrastructure:
 2. pick one of directory 
 3. add terraform.tfvars file with content:<br>
 ```
-subscription_id = ""<br>
-client_id = ""<br>
-client_secret = ""<br>
-tenant_id = ""<br>
+subscription_id = ""
+client_id = ""
+client_secret = ""
+tenant_id = ""
 ```
 3. run terraform plan and terraform apply 
