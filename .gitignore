@@ -1,11 +1,10 @@
 # Local .terraform directories
 **/.terraform/*
-terraform.tfstate.d/*
+**/terraform.tfstate.d/*
 
 # .tfstate files
 *.tfstate
 *.tfstate.*
-terraform.tfvars
 # Crash log files
 crash.log
 
@@ -31,5 +30,5 @@ override.tf.json
 # example: *tfplan*
 
 # Ignore CLI configuration files
-.terraformrc
-terraform.rc
+*.terraformrc
+*terraform.rc
